@@ -309,7 +309,7 @@ namespace MrGVSV.PixelContour
             return new Vector2Int( (int) vector2.x, (int) vector2.y );
         }
         
-        internal static IEnumerable<Vector2Int> EdgesToVertices(IEnumerable<ContourEdge> edges)
+        public static IEnumerable<Vector2Int> EdgesToVertices(IEnumerable<ContourEdge> edges)
         {
             List<ContourEdge> uniqueEdges = edges.Distinct().ToList();
             List<Vector2Int> points = new List<Vector2Int>( 2 * uniqueEdges.Count );
