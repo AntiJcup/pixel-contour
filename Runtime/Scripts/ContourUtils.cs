@@ -132,36 +132,14 @@ namespace MrGVSV.PixelContour
         /// </summary>
         /// <param name="points">The points</param>
         /// <returns>The bounds of the points</returns>
-        public static Bounds GetBounds(ICollection<Vector2> points)
+        public static Bounds GetBounds(List<Vector2> points)
         {
-            Debug.Assert( points.Count > 2, "points.Count > 2" );
-            Vector2 min = points.ElementAt( 0 );
-            Vector2 max = points.ElementAt( 0 );
-            foreach (Vector2 point in points)
-            {
-                if (point.x < min.x)
-                {
-                    min.x = point.x;
-                }
+            Debug.Assert(points.Count > 2, "points.Count > 2");
+            var bounds = new Bounds(points[0], Vector2.zero);
 
-                if (point.y < min.y)
-                {
-                    min.y = point.y;
-                }
-
-                if (point.x > max.x)
-                {
-                    max.x = point.x;
-                }
-
-                if (point.y > max.y)
-                {
-                    max.y = point.y;
-                }
-            }
-
-            Vector2 size = max - min;
-            return new Bounds( size / 2, size );
+            for (var i = 1; i < points.Count; i++)
+                bounds.Encapsulate(points[i]);
+            return bounds;
         }
 
         /// <summary>
