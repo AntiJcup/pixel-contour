@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace MrGVSV.PixelContour
 {
-    internal readonly struct ContourEdge : IEquatable<ContourEdge>
+    public readonly struct ContourEdge : IEquatable<ContourEdge>
     {
         /// <summary>
         /// The starting corner of a pixel
