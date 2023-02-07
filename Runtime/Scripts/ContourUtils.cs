@@ -177,7 +177,8 @@ namespace MrGVSV.PixelContour
         {
             var startToEnd = Abs(end - start).normalized;
 
-            return startToEnd.x == .5f && startToEnd.y == .5f;
+            Debug.Log($"startToEnd: {startToEnd}");
+            return Mathf.Approximately(startToEnd.x, .5f) && Mathf.Approximately(startToEnd.y, .5f);
         }
         
         //    __  __       _   _     
