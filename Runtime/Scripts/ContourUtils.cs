@@ -176,10 +176,8 @@ namespace MrGVSV.PixelContour
         public static bool IsDiagonal(Vector2 point, Vector2 start, Vector2 end)
         {
             var startToEnd = Abs(end - start).normalized;
-            var startToPoint = Abs(point - start).normalized;
-            var pointToEnd = Abs(end - point).normalized;
 
-            return startToEnd.x == startToPoint.x && startToEnd.x == pointToEnd.x && startToEnd.x == .5f && startToEnd.y == startToPoint.y && startToEnd.y == pointToEnd.y && startToEnd.y == .5f;
+            return startToEnd.x == .5f && startToEnd.y == .5f;
         }
         
         //    __  __       _   _     
