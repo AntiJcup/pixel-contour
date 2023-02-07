@@ -60,7 +60,7 @@ namespace MrGVSV.PixelContour
             List<Vector2> vertices = new List<Vector2>( points.Count );
             ForTriad( points, (i, prev, point, next) =>
             {
-                if (!OnLineSegment( point, prev, next ))
+                if (!OnLineSegment( point, prev, next ) && !IsDiagonal(point, prev, next))
                 {
                     vertices.Add( points.ElementAt( i ) );
                 }
@@ -166,6 +166,20 @@ namespace MrGVSV.PixelContour
             }
 
             return segment.y > 0 ? start.y <= point.y && point.y <= end.y : end.y <= point.y && point.y <= start.y;
+        }
+
+        public static Vector2 Abs(Vector2 v2)
+        {
+            return new Vector2(Mathf.Abs(v2.x), Mathf.Abs(v2.y));
+        }
+
+        public static bool IsDiagonal(Vector2 point, Vector2 start, Vector2 end)
+        {
+            var startToEnd = Abs(end - start).normalized;
+            var startToPoint = Abs(point - start).normalized;
+            var pointToEnd = Abs(end - point).normalized;
+
+            return startToEnd.x == startToPoint.x && startToEnd.x == pointToEnd.x && startToEnd.x == .5f && startToEnd.y == startToPoint.y && startToEnd.y == pointToEnd.y && startToEnd.y == .5f;
         }
         
         //    __  __       _   _     
