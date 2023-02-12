@@ -60,7 +60,7 @@ namespace MrGVSV.PixelContour
             List<Vector2> vertices = new List<Vector2>( points.Count );
             ForTriad( points, (i, prev, point, next) =>
             {
-                if (!OnLineSegment( point, prev, next ) && !IsDiagonal(point, prev, next))
+                if (!OnLineSegment( point, prev, next ))
                 {
                     vertices.Add( points.ElementAt( i ) );
                 }
