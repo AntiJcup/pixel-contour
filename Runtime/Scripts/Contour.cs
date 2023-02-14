@@ -87,7 +87,11 @@ namespace MrGVSV.PixelContour
         /// <returns>The simplified contour</returns>
         public Contour Simplified(float tolerance = .1f)
         {
-            return new Contour( ContourUtils.Simplify( Points.ToList(), tolerance ) );
+            var cPoints = ContourUtils.Simplify(Points.ToList(), tolerance);
+            if(cPoints.Count <= 2 ) {
+                return null;
+            }
+            return new Contour(cPoints);
         }
     }
 }
