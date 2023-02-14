@@ -55,7 +55,7 @@ namespace MrGVSV.PixelContour
         /// </remarks>
         /// <param name="points">The points to simplify</param>
         /// <returns>The simplified points</returns>
-        public static List<Vector2> Simplify(ICollection<Vector2> points, float tolerance)
+        public static List<Vector2> Simplify(List<Vector2> points, float tolerance)
         {
             var simplePointIndices = new List<int>();
             LineUtility.Simplify(points, tolerance, simplePointIndices);
