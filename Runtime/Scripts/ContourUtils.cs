@@ -57,9 +57,14 @@ namespace MrGVSV.PixelContour
         /// <returns>The simplified points</returns>
         public static List<Vector2> Simplify(ICollection<Vector2> points, float tolerance)
         {
-            var simplePoints = new List<Vector2>();
-            LineUtility.Simplify(points, tolerance, simplePoints);
+            var simplePointIndices = new List<int>();
+            LineUtility.Simplify(points, tolerance, simplePointIndices);
 
+            var simplePoints = new List<Vector2>(simplePointIndices.Count);
+            foreach (var sp in simplePointIndices)
+            {
+                simplePoints.Add(points[sp]);
+            }
             return simplePoints;
         }
 
@@ -71,15 +76,16 @@ namespace MrGVSV.PixelContour
         /// <returns>The expanded vertices</returns>
         public static List<ContourVertex> Expand(ICollection<ContourVertex> vertices, float amount)
         {
-            var simplePointIndices = new List<int>();
-            LineUtility.Simplify(points, tolerance, simplePointIndices);
-
-            var simplePoints = new List<Vector2>(simplePointIndices.Count);
-            foreach (var sp in simplePointIndices)
+            List<Vector2> points = new List<Vector2>( vertices.Count );
+            
+            foreach (ContourVertex vertex in vertices)
             {
-                simplePoints.Add(points[sp]);
+                Vector2 normal = vertex.PixelNormal;
+                Vector2 position = vertex.Position + ( amount * normal );
+                points.Add( position );
             }
-            return simplePoints;
+
+            return PointsToVertices( points );
         }
 
         /// <summary>
