@@ -85,9 +85,9 @@ namespace MrGVSV.PixelContour
         /// This only affects collinear vertices. Corners and diagonals will not be simplified.
         /// </remarks>
         /// <returns>The simplified contour</returns>
-        public Contour Simplified()
+        public Contour Simplified(float tolerance)
         {
-            return new Contour( ContourUtils.Simplify( Points.ToList() ) );
+            return new Contour( ContourUtils.Simplify( Points.ToList(), tolerance ) );
         }
     }
 }

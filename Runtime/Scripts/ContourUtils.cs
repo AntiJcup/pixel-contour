@@ -55,18 +55,12 @@ namespace MrGVSV.PixelContour
         /// </remarks>
         /// <param name="points">The points to simplify</param>
         /// <returns>The simplified points</returns>
-        public static List<Vector2> Simplify(ICollection<Vector2> points)
+        public static List<Vector2> Simplify(ICollection<Vector2> points, float tolerance)
         {
-            List<Vector2> vertices = new List<Vector2>( points.Count );
-            ForTriad( points, (i, prev, point, next) =>
-            {
-                if (!OnLineSegment( point, prev, next ))
-                {
-                    vertices.Add( points.ElementAt( i ) );
-                }
-            } );
+            var simplePoints = new List<Vector2>();
+            LineUtility.Simplify(contour.Points.ToList(), tolerance, simplePoints);
 
-            return vertices;
+            return simplePoints;
         }
 
         /// <summary>
