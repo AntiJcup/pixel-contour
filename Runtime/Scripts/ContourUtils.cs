@@ -58,7 +58,7 @@ namespace MrGVSV.PixelContour
         public static List<Vector2> Simplify(ICollection<Vector2> points, float tolerance)
         {
             var simplePoints = new List<Vector2>();
-            LineUtility.Simplify(contour.Points.ToList(), tolerance, simplePoints);
+            LineUtility.Simplify(points, tolerance, simplePoints);
 
             return simplePoints;
         }
